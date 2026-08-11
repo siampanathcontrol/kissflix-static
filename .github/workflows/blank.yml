@@ -12,6 +12,8 @@ jobs:
 
       - name: Deploy to Cloudflare Pages
         run: |
-          curl -X POST "https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/YOUR_DEPLOY_HOOK"
+          npm install -g wrangler
+          wrangler pages deploy . --project-name=kissflix-site --commit-dirty=true
         env:
-          YOUR_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
